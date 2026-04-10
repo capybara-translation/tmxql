@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmx version="1.4">
+  <header creationtool="TMXQLSample" creationtoolversion="1.0"
+          segtype="sentence" o-tmf="plaintext" adminlang="en-us"
+          srclang="*all*" datatype="plaintext"/>
+  <body>
+    <tu tuid="color_red">
+      <tuv xml:lang="EN"><seg>Red</seg></tuv>
+      <tuv xml:lang="JA"><seg>赤</seg></tuv>
+      <tuv xml:lang="FR"><seg>Rouge</seg></tuv>
+      <tuv xml:lang="DE"><seg>Rot</seg></tuv>
+    </tu>
+
+    <tu tuid="color_blue">
+      <tuv xml:lang="EN"><seg>Blue</seg></tuv>
+      <tuv xml:lang="JA"><seg>青</seg></tuv>
+      <tuv xml:lang="FR"><seg>Bleu</seg></tuv>
+      <tuv xml:lang="DE"><seg>Blau</seg></tuv>
+    </tu>
+
+    <tu tuid="color_green">
+      <tuv xml:lang="EN"><seg>Green</seg></tuv>
+      <tuv xml:lang="JA"><seg>緑</seg></tuv>
+      <tuv xml:lang="FR"><seg>Vert</seg></tuv>
+      <tuv xml:lang="DE"><seg>Grün</seg></tuv>
+    </tu>
+
+    <tu tuid="animal_cat">
+      <tuv xml:lang="EN"><seg>Cat</seg></tuv>
+      <tuv xml:lang="JA"><seg>猫</seg></tuv>
+      <tuv xml:lang="FR"><seg>Chat</seg></tuv>
+      <tuv xml:lang="DE"><seg>Katze</seg></tuv>
+    </tu>
+
+    <tu tuid="animal_dog">
+      <tuv xml:lang="EN"><seg>Dog</seg></tuv>
+      <tuv xml:lang="JA"><seg>犬</seg></tuv>
+      <tuv xml:lang="FR"><seg>Chien</seg></tuv>
+      <tuv xml:lang="DE"><seg>Hund</seg></tuv>
+    </tu>
+  </body>
+</tmx>

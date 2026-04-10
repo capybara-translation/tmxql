@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmx version="1.4">
+  <header creationtool="TMXQLSample" creationtoolversion="1.0"
+          segtype="sentence" o-tmf="plaintext" adminlang="en-us"
+          srclang="EN" datatype="plaintext"/>
+  <body>
+    <!-- Normal: header srclang (EN) is source -->
+    <tu tuid="tu1">
+      <tuv xml:lang="EN"><seg>Hello</seg></tuv>
+      <tuv xml:lang="JA"><seg>こんにちは</seg></tuv>
+      <tuv xml:lang="FR"><seg>Bonjour</seg></tuv>
+    </tu>
+
+    <!-- tu srclang override: JA is source for this unit -->
+    <tu tuid="tu2" srclang="JA">
+      <tuv xml:lang="EN"><seg>Cherry blossom</seg></tuv>
+      <tuv xml:lang="JA"><seg>桜</seg></tuv>
+      <tuv xml:lang="FR"><seg>Fleur de cerisier</seg></tuv>
+    </tu>
+
+    <!-- tu srclang override: FR is source for this unit -->
+    <tu tuid="tu3" srclang="FR">
+      <tuv xml:lang="EN"><seg>Croissant</seg></tuv>
+      <tuv xml:lang="JA"><seg>クロワッサン</seg></tuv>
+      <tuv xml:lang="FR"><seg>Croissant</seg></tuv>
+    </tu>
+
+    <!-- Back to normal: header srclang (EN) -->
+    <tu tuid="tu4">
+      <tuv xml:lang="EN"><seg>Thank you</seg></tuv>
+      <tuv xml:lang="JA"><seg>ありがとう</seg></tuv>
+      <tuv xml:lang="FR"><seg>Merci</seg></tuv>
+    </tu>
+
+    <!-- tu srclang override: JA again -->
+    <tu tuid="tu5" srclang="JA">
+      <tuv xml:lang="EN"><seg>Tsunami</seg></tuv>
+      <tuv xml:lang="JA"><seg>津波</seg></tuv>
+      <tuv xml:lang="FR"><seg>Tsunami</seg></tuv>
+    </tu>
+  </body>
+</tmx>

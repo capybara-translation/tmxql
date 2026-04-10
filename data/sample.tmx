@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmx version="1.4">
+  <header creationtool="TMXQLSample" creationtoolversion="1.0"
+          segtype="sentence" o-tmf="plaintext" adminlang="en-us"
+          srclang="EN" datatype="plaintext"/>
+  <body>
+    <!-- Basic translation units -->
+    <tu tuid="greeting">
+      <tuv xml:lang="EN"><seg>Hello</seg></tuv>
+      <tuv xml:lang="JA"><seg>こんにちは</seg></tuv>
+      <tuv xml:lang="FR"><seg>Bonjour</seg></tuv>
+    </tu>
+
+    <tu tuid="farewell">
+      <tuv xml:lang="EN"><seg>Goodbye</seg></tuv>
+      <tuv xml:lang="JA"><seg>さようなら</seg></tuv>
+      <tuv xml:lang="FR"><seg>Au revoir</seg></tuv>
+    </tu>
+
+    <!-- With note -->
+    <tu tuid="thanks">
+      <note>Used in formal context</note>
+      <tuv xml:lang="EN"><seg>Thank you very much</seg></tuv>
+      <tuv xml:lang="JA"><seg>誠にありがとうございます</seg></tuv>
+      <tuv xml:lang="FR"><seg>Merci beaucoup</seg></tuv>
+    </tu>
+
+    <!-- Missing translation for one language -->
+    <tu tuid="untranslated">
+      <tuv xml:lang="EN"><seg>This sentence has not been translated to French yet.</seg></tuv>
+      <tuv xml:lang="JA"><seg>この文はまだフランス語に翻訳されていません。</seg></tuv>
+    </tu>
+
+    <!-- TUV-level notes -->
+    <tu tuid="tuv_notes">
+      <tuv xml:lang="EN">
+        <note>Formal greeting</note>
+        <seg>Good morning</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <note>丁寧な表現</note>
+        <seg>おはようございます</seg>
+      </tuv>
+      <tuv xml:lang="FR">
+        <seg>Bonjour</seg>
+      </tuv>
+    </tu>
+
+    <!-- Both TU-level and TUV-level notes -->
+    <tu tuid="mixed_notes">
+      <note>Context: UI button label</note>
+      <tuv xml:lang="EN">
+        <note>Max 10 chars</note>
+        <seg>Submit</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <note>最大5文字</note>
+        <seg>送信</seg>
+      </tuv>
+      <tuv xml:lang="FR">
+        <note>Max 12 caractères</note>
+        <seg>Soumettre</seg>
+      </tuv>
+    </tu>
+
+    <!-- XML entities -->
+    <tu tuid="entities">
+      <tuv xml:lang="EN"><seg>A &amp; B &lt;C&gt;</seg></tuv>
+      <tuv xml:lang="JA"><seg>A &amp; B &lt;C&gt;</seg></tuv>
+      <tuv xml:lang="FR"><seg>A &amp; B &lt;C&gt;</seg></tuv>
+    </tu>
+
+    <!-- Inline tags -->
+    <tu tuid="inline_bpt_ept">
+      <tuv xml:lang="EN"><seg><bpt i="1">&lt;b&gt;</bpt>Bold text<ept i="1">&lt;/b&gt;</ept> and normal</seg></tuv>
+      <tuv xml:lang="JA"><seg><bpt i="1">&lt;b&gt;</bpt>太字テキスト<ept i="1">&lt;/b&gt;</ept> と通常</seg></tuv>
+    </tu>
+
+    <tu tuid="inline_ph">
+      <tuv xml:lang="EN"><seg>Hello <ph>{userName}</ph>, welcome to <ph>{appName}</ph></seg></tuv>
+      <tuv xml:lang="JA"><seg>こんにちは <ph>{userName}</ph>、<ph>{appName}</ph>へようこそ</seg></tuv>
+    </tu>
+
+    <!-- Multiline text -->
+    <tu tuid="multiline">
+      <tuv xml:lang="EN"><seg>First line.
+Second line.
+Third line.</seg></tuv>
+      <tuv xml:lang="JA"><seg>1行目。
+2行目。
+3行目。</seg></tuv>
+    </tu>
+
+    <!-- Many TUs for scroll testing -->
+    <tu tuid="item_001">
+      <tuv xml:lang="EN"><seg>File</seg></tuv>
+      <tuv xml:lang="JA"><seg>ファイル</seg></tuv>
+      <tuv xml:lang="FR"><seg>Fichier</seg></tuv>
+    </tu>
+    <tu tuid="item_002">
+      <tuv xml:lang="EN"><seg>Edit</seg></tuv>
+      <tuv xml:lang="JA"><seg>編集</seg></tuv>
+      <tuv xml:lang="FR"><seg>Modifier</seg></tuv>
+    </tu>
+    <tu tuid="item_003">
+      <tuv xml:lang="EN"><seg>View</seg></tuv>
+      <tuv xml:lang="JA"><seg>表示</seg></tuv>
+      <tuv xml:lang="FR"><seg>Affichage</seg></tuv>
+    </tu>
+    <tu tuid="item_004">
+      <tuv xml:lang="EN"><seg>Window</seg></tuv>
+      <tuv xml:lang="JA"><seg>ウインドウ</seg></tuv>
+      <tuv xml:lang="FR"><seg>Fenêtre</seg></tuv>
+    </tu>
+    <tu tuid="item_005">
+      <tuv xml:lang="EN"><seg>Help</seg></tuv>
+      <tuv xml:lang="JA"><seg>ヘルプ</seg></tuv>
+      <tuv xml:lang="FR"><seg>Aide</seg></tuv>
+    </tu>
+    <tu tuid="item_006">
+      <tuv xml:lang="EN"><seg>Open</seg></tuv>
+      <tuv xml:lang="JA"><seg>開く</seg></tuv>
+      <tuv xml:lang="FR"><seg>Ouvrir</seg></tuv>
+    </tu>
+    <tu tuid="item_007">
+      <tuv xml:lang="EN"><seg>Save</seg></tuv>
+      <tuv xml:lang="JA"><seg>保存</seg></tuv>
+      <tuv xml:lang="FR"><seg>Enregistrer</seg></tuv>
+    </tu>
+    <tu tuid="item_008">
+      <tuv xml:lang="EN"><seg>Close</seg></tuv>
+      <tuv xml:lang="JA"><seg>閉じる</seg></tuv>
+      <tuv xml:lang="FR"><seg>Fermer</seg></tuv>
+    </tu>
+    <tu tuid="item_009">
+      <tuv xml:lang="EN"><seg>Print</seg></tuv>
+      <tuv xml:lang="JA"><seg>印刷</seg></tuv>
+      <tuv xml:lang="FR"><seg>Imprimer</seg></tuv>
+    </tu>
+    <tu tuid="item_010">
+      <tuv xml:lang="EN"><seg>Search</seg></tuv>
+      <tuv xml:lang="JA"><seg>検索</seg></tuv>
+      <tuv xml:lang="FR"><seg>Rechercher</seg></tuv>
+    </tu>
+  </body>
+</tmx>
