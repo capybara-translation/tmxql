@@ -4,6 +4,8 @@ A macOS QuickLook extension that previews TMX 1.4b files (`.tmx`) directly in Fi
 
 Displays translation units in a grid format with one column per language. The source language column is placed first.
 
+![QuickLook Preview](screenshots/app.png)
+
 ## Features
 
 - Grid preview of TMX 1.4b files
