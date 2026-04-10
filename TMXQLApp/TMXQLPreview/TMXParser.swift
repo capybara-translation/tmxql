@@ -39,6 +39,7 @@ final class TMXParser: NSObject, XMLParserDelegate {
     private var inTUV = false
     private var inSeg = false
     private var inNote = false
+    private var noteInTUV = false
     private var currentText = ""
 
     // Inline elements rendered as visible tag markers
@@ -84,11 +85,17 @@ final class TMXParser: NSObject, XMLParserDelegate {
         inTUV = false
         inSeg = false
         inNote = false
+        noteInTUV = false
         currentText = ""
     }
 
-    /// Build ordered language list: srclang first, then remaining in discovery order
+    /// Build ordered language list: srclang first, then remaining in discovery order.
+    /// When srclang is "*all*", no language gets priority — discovery order is preserved.
     private func buildLanguageOrder() -> [String] {
+        if headerSrclang == "*all*" {
+            return languageOrder
+        }
+
         let srcNorm = headerSrclang.lowercased()
         var result: [String] = []
 
@@ -148,6 +155,7 @@ final class TMXParser: NSObject, XMLParserDelegate {
         case "note":
             if inTU {
                 inNote = true
+                noteInTUV = inTUV
                 currentText = ""
             }
 
@@ -190,7 +198,7 @@ final class TMXParser: NSObject, XMLParserDelegate {
 
         case "note":
             if inTU && inNote {
-                if inTUV {
+                if noteInTUV {
                     currentTuvNotes[currentLang] = currentText
                 } else {
                     currentNote = currentText

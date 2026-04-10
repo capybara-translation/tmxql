@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<tmx version="1.4">
+  <header creationtool="test" creationtoolversion="1.0"
+          segtype="sentence" o-tmf="plaintext" adminlang="en-us"
+          srclang="EN" datatype="plaintext"/>
+  <body>
+    <tu tuid="tu1">
+      <tuv xml:lang="EN"><seg>Hello with BOM</seg></tuv>
+      <tuv xml:lang="JA"><seg>BOM付きこんにちは</seg></tuv>
+    </tu>
+  </body>
+</tmx>

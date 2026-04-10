@@ -6,6 +6,7 @@ class PreviewViewController: NSViewController, QLPreviewingController {
     private var scrollView: NSScrollView!
     private var tableView: NSTableView!
     private var document: TMXDocument?
+    private var rowHeightCache: [Int: CGFloat] = [:]
 
     // Measurement cell for height calculation
     private lazy var measureField: NSTextField = {
@@ -38,6 +39,7 @@ class PreviewViewController: NSViewController, QLPreviewingController {
 
         await MainActor.run {
             document = doc
+            rowHeightCache = [:]
             setupUI(languages: doc.languages)
             tableView.reloadData()
         }
@@ -118,10 +120,7 @@ class PreviewViewController: NSViewController, QLPreviewingController {
     }
 
     private func columnWidth(_ id: String) -> CGFloat {
-        for col in tableView.tableColumns where col.identifier.rawValue == id {
-            return col.width
-        }
-        return 200
+        tableView.tableColumn(withIdentifier: NSUserInterfaceItemIdentifier(id))?.width ?? 200
     }
 }
 
@@ -138,6 +137,8 @@ extension PreviewViewController: NSTableViewDataSource, NSTableViewDelegate {
     }
 
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        if let cached = rowHeightCache[row] { return cached }
+
         guard let doc = document else { return 20 }
         let unit = doc.units[row]
         let font = NSFont.systemFont(ofSize: 13)
@@ -155,6 +156,8 @@ extension PreviewViewController: NSTableViewDataSource, NSTableViewDelegate {
             let noteH = cellHeight(for: note, font: .systemFont(ofSize: 11), columnWidth: columnWidth("note"))
             if noteH > maxH { maxH = noteH }
         }
+
+        rowHeightCache[row] = maxH
         return maxH
     }
 

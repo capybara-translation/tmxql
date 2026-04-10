@@ -66,3 +66,5 @@ fastlane/test_output
 
 .claude/settings.local.json
 plans/
+tmp/
+data/sample_10k.tmx
