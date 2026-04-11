@@ -19,13 +19,12 @@ Displays translation units in a grid format with one column per language. The so
 
 1. Download `TMXQLApp.app` from [Releases](../../releases)
 2. Copy `TMXQLApp.app` to `/Applications`
-3. Launch `TMXQLApp.app` once (this registers the extension with macOS)
-4. Select a `.tmx` file in Finder and press Space to preview
-
-> **Note:** This app is unsigned. On first launch, macOS Gatekeeper may block it. Run the following command before launching:
-> ```bash
-> xattr -cr /Applications/TMXQLApp.app
-> ```
+3. Remove the quarantine attribute (required because the app is unsigned):
+   ```bash
+   xattr -cr /Applications/TMXQLApp.app
+   ```
+4. Launch `TMXQLApp.app` once (this registers the extension with macOS)
+5. Select a `.tmx` file in Finder and press Space to preview
 
 ## Uninstallation
 
