@@ -47,6 +47,8 @@
 		AA0000112FA0000100AA0011 /* TMXQLPreview.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TMXQLPreview.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0000122FA0000100AA0012 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		AA0000132FA0000100AA0013 /* TMXQLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TMXQLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF42806E2F89DD5100487E1C /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		CF42806F2F89DD9B00487E1C /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -127,6 +129,7 @@
 		AA0000022FA0000100AA0002 = {
 			isa = PBXGroup;
 			children = (
+				CF42806D2F89DD4000487E1C /* Config */,
 				AA0000402FA0000100AA0040 /* TMXQLApp */,
 				AA0000412FA0000100AA0041 /* TMXQLPreview */,
 				AA0000422FA0000100AA0042 /* TMXQLTests */,
@@ -151,6 +154,15 @@
 				AA0000122FA0000100AA0012 /* Quartz.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CF42806D2F89DD4000487E1C /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				CF42806F2F89DD9B00487E1C /* Release.xcconfig */,
+				CF42806E2F89DD5100487E1C /* Debug.xcconfig */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,6 +344,7 @@
 /* Begin XCBuildConfiguration section */
 		AA0000902FA0000100AA0090 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF42806E2F89DD5100487E1C /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -395,6 +408,7 @@
 		};
 		AA0000912FA0000100AA0091 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF42806F2F89DD9B00487E1C /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -468,7 +482,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nyaaaan.TMXQLApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -500,7 +514,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nyaaaan.TMXQLApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -529,7 +543,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nyaaaan.TMXQLApp.TMXQLPreview;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(QL_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -557,7 +571,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nyaaaan.TMXQLApp.TMXQLPreview;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(QL_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
