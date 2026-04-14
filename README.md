@@ -33,11 +33,6 @@ Displays translation units in a grid format with one column per language. The so
 
 ## Building from Source
 
-### Requirements
-
-- macOS 13+
-- Xcode 15+
-
 ### Run
 
 1. Open `TMXQLApp.xcodeproj` in Xcode
