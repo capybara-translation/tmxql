@@ -17,8 +17,8 @@ Displays translation units in a grid format with one column per language. The so
 
 ## Installation
 
-1. Download `TMXQLApp.app` from [Releases](../../releases)
-2. Copy `TMXQLApp.app` to `/Applications`
+1. Download `TMXQLApp.zip` from [Releases](../../releases)
+2. Extract the ZIP and copy `TMXQLApp.app` to `/Applications`
 3. Remove the quarantine attribute (required because the app is unsigned):
    ```bash
    xattr -cr /Applications/TMXQLApp.app
