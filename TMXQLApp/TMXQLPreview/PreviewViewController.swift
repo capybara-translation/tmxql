@@ -8,6 +8,8 @@ class PreviewViewController: NSViewController, QLPreviewingController {
     private var document: TMXDocument?
     private var rowHeightCache: [Int: CGFloat] = [:]
 
+    private let cellPadding = NSEdgeInsets(top: 4, left: 6, bottom: 4, right: 6)
+
     // Measurement cell for height calculation
     private lazy var measureField: NSTextField = {
         let tf = NSTextField(wrappingLabelWithString: "")
@@ -22,6 +24,11 @@ class PreviewViewController: NSViewController, QLPreviewingController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        preferredContentSize = NSSize(width: 1200, height: 1400)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     func preparePreviewOfFile(at url: URL) async throws {
@@ -74,6 +81,9 @@ class PreviewViewController: NSViewController, QLPreviewingController {
         tableView.allowsColumnResizing = true
         tableView.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
         tableView.selectionHighlightStyle = .none
+        tableView.gridStyleMask = [.solidVerticalGridLineMask, .solidHorizontalGridLineMask]
+        tableView.gridColor = .separatorColor
+        tableView.intercellSpacing = NSSize(width: 0, height: 0)
 
         // # column (tuid)
         let idColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("tuid"))
@@ -106,17 +116,32 @@ class PreviewViewController: NSViewController, QLPreviewingController {
 
         scrollView.documentView = tableView
         view.addSubview(scrollView)
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(tableColumnDidResize(_:)),
+            name: NSTableView.columnDidResizeNotification,
+            object: tableView
+        )
+    }
+
+    @objc private func tableColumnDidResize(_ notification: Notification) {
+        guard let doc = document, !doc.units.isEmpty else { return }
+        rowHeightCache.removeAll()
+        tableView.noteHeightOfRows(withIndexesChanged: IndexSet(integersIn: 0..<doc.units.count))
     }
 
     // MARK: - Height Calculation
 
     private func cellHeight(for string: String, font: NSFont, columnWidth: CGFloat) -> CGFloat {
-        guard !string.isEmpty else { return font.pointSize + 6 }
-        measureField.stringValue = string
+        let contentWidth = max(1, columnWidth - cellPadding.left - cellPadding.right)
+        let verticalPadding = cellPadding.top + cellPadding.bottom
+        let measured = string.isEmpty ? " " : string
+        measureField.stringValue = measured
         measureField.font = font
-        guard let cell = measureField.cell else { return 20 }
-        let bounds = NSRect(x: 0, y: 0, width: columnWidth, height: .greatestFiniteMagnitude)
-        return cell.cellSize(forBounds: bounds).height
+        guard let cell = measureField.cell else { return 20 + verticalPadding }
+        let bounds = NSRect(x: 0, y: 0, width: contentWidth, height: .greatestFiniteMagnitude)
+        return cell.cellSize(forBounds: bounds).height + verticalPadding
     }
 
     private func columnWidth(_ id: String) -> CGFloat {
@@ -167,35 +192,48 @@ extension PreviewViewController: NSTableViewDataSource, NSTableViewDelegate {
         let unit = doc.units[row]
 
         let cellId = NSUserInterfaceItemIdentifier("Cell_\(columnId.rawValue)")
-        let cell: NSTextField
+        let cellView: NSTableCellView
+        let textField: NSTextField
 
-        if let existing = tableView.makeView(withIdentifier: cellId, owner: nil) as? NSTextField {
-            cell = existing
+        if let existing = tableView.makeView(withIdentifier: cellId, owner: nil) as? NSTableCellView,
+           let tf = existing.textField {
+            cellView = existing
+            textField = tf
         } else {
-            cell = NSTextField(wrappingLabelWithString: "")
-            cell.identifier = cellId
-            cell.maximumNumberOfLines = 0
-            cell.lineBreakMode = .byWordWrapping
-            cell.cell?.wraps = true
-            cell.cell?.isScrollable = false
-            cell.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+            cellView = NSTableCellView()
+            cellView.identifier = cellId
+            let tf = NSTextField(wrappingLabelWithString: "")
+            tf.maximumNumberOfLines = 0
+            tf.lineBreakMode = .byWordWrapping
+            tf.cell?.wraps = true
+            tf.cell?.isScrollable = false
+            tf.translatesAutoresizingMaskIntoConstraints = false
+            cellView.addSubview(tf)
+            cellView.textField = tf
+            NSLayoutConstraint.activate([
+                tf.topAnchor.constraint(equalTo: cellView.topAnchor, constant: cellPadding.top),
+                tf.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -cellPadding.bottom),
+                tf.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: cellPadding.left),
+                tf.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -cellPadding.right),
+            ])
+            textField = tf
         }
 
         switch columnId.rawValue {
         case "tuid":
-            cell.stringValue = unit.tuid
-            cell.font = .monospacedSystemFont(ofSize: 11, weight: .regular)
-            cell.textColor = .secondaryLabelColor
+            textField.stringValue = unit.tuid
+            textField.font = .monospacedSystemFont(ofSize: 11, weight: .regular)
+            textField.textColor = .secondaryLabelColor
 
         case "note":
             if let note = unit.note {
-                cell.stringValue = note
-                cell.font = .systemFont(ofSize: 11)
-                cell.textColor = .secondaryLabelColor
+                textField.stringValue = note
+                textField.font = .systemFont(ofSize: 11)
+                textField.textColor = .secondaryLabelColor
             } else {
-                cell.stringValue = ""
-                cell.font = .systemFont(ofSize: 11)
-                cell.textColor = .tertiaryLabelColor
+                textField.stringValue = ""
+                textField.font = .systemFont(ofSize: 11)
+                textField.textColor = .tertiaryLabelColor
             }
 
         default:
@@ -209,18 +247,18 @@ extension PreviewViewController: NSTableViewDataSource, NSTableViewDelegate {
                 if let tuvNote = unit.tuvNotes[lang] {
                     display += "\n[\(tuvNote)]"
                 }
-                cell.stringValue = display
-                cell.font = isSrclang
+                textField.stringValue = display
+                textField.font = isSrclang
                     ? .systemFont(ofSize: 13, weight: .semibold)
                     : .systemFont(ofSize: 13)
-                cell.textColor = .labelColor
+                textField.textColor = .labelColor
             } else {
-                cell.stringValue = "—"
-                cell.font = .systemFont(ofSize: 13)
-                cell.textColor = .tertiaryLabelColor
+                textField.stringValue = "—"
+                textField.font = .systemFont(ofSize: 13)
+                textField.textColor = .tertiaryLabelColor
             }
         }
 
-        return cell
+        return cellView
     }
 }
